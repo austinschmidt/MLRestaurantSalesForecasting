@@ -37,10 +37,17 @@ A feature test is not included for the TFT model, instead we estimate the best n
 
 ### (4) FinalTestingOneDay.ipynb
 
-
+The best models, number of features, and tuning results are taken and applied to all three datasets for one-day forecasting. Each model will output its forecast over the same predefined test dataset so direct comparisons may be made. Non-recurrent models are tested first, then recurrent models, then TFT is shown in its own section. The author has already set up the optimal number of features, so we may run this sequentially to see interesting results.
 
 ### (5) FinalTestingOneWeek.ipynb
 
-
+The best models, number of features, and tuning results are taken and applied to all three datasets for one-week forecasting. Each model will output its forecast over the same predefined test dataset so direct comparisons may be made. The test for one-week forecasting includes starting on each day of the week so a sliding test window is used and each forecast is displayed. The MAE of each forecast is recorded and the mean MAE and standard deviation is calculated to determine model stability. Non-recurrent models are tested first, then recurrent models, then TFT is shown in its own section. The author has already set up the optimal number of features, so we may run this sequentially to see interesting results.
 
 **Note:** The following features were removed from one-week forecasting:  DailyAvg, DailyBusyness, and AvgDailyDiff due to concerns of improper information gain, however this was a mistake and these features really can be used. Luckily they rank low on feature importance, so it is likely this hurt performance very little. 
+
+## Workflow:
+In Figure 1 we display the general workflow used to create a model. 
+
+ ![Picture1](https://user-images.githubusercontent.com/16788108/119714863-f860e100-be28-11eb-87f8-cff292b5b06e.jpg)
+**Figure 1:** Model Training/Testing Flowchart. We display the lifecycle from raw preprocessed data to fully functional forecasting models. Collected raw data is organized as described in the text. Data scaling brings all features in line with one another. The feature test provides the optimal number of features. The best non-recurrent and all recurrent models move on for final testing.  Beyond the increased class-size for one-week forecasting, the flowchart methodology is exactly the same. The testing files can be run sequentiallyu as listed above from 1-5. The optimal number of features and tunig results need to be added manyually to the final testing suits, but this has already happened, so the test suits can just be run to see the completed results
+
