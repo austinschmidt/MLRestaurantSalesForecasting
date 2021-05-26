@@ -23,12 +23,24 @@ There are 5 Jupyter Notebook files holding training/testing procedures for a lar
 
 ### (1) Scikit Feature Selection.ipynb
 
+A feature test is conducted on all surveyed non-recurrent models. There are taken directly from the scikit-learn library, and have few changes made to hyperparameters. Features are first ranked and then cross-validation is used to determine the MAE score generated from the model using an iteraively increasing number of features from n=1 to n='all'.  First feature testing for the Actual, Daily Differenced, and Weekly Differenced datasets are completed with one-day forecasting. The MAE scores are recorded and then outputted to an .csv file for analysis. The process is then repeated for one-week forecasting using a model wrapper to use one instance for a full week of prediction.
+
 ### (2) Keras Feature Selection.ipynb
+
+A feature test is conducted on all surveyed recurrent models. There are taken directly from the keras library, and have few changes made to hyperparameters. Early stopping and dropout layers aid in prevention of overfitting. Features are first ranked and then a train/test split is used to determine the MAE score generated from the model using an iteraively increasing number of features from n=1 to n='all'.  First feature testing for the Actual, Daily Differenced, and Weekly Differenced datasets are completed with one-day forecasting. The MAE scores are recorded and then outputted to an .csv file for analysis. The process is then repeated for one-week forecasting increasing the number of output nodes to use one instance for a full week of prediction.
 
 ### (3) TransformerTuning.ipynb 
 
+A feature test is not included for the TFT model, instead we estimate the best number of features to use from the LSTM model which TFT implements as it's recurrent backbone. TFT is so much larger than the other models that tuning is a necessity. In this file we tune hyperparameters for the TFT model using all three datasets as used in the feature test. Also, for each dataset we tune twice. Once with the full feature selection and once with the best-estimated number for a total of six TFT models tuned for one-day forecasting. The process is again repeated for one-week testing. 
+
+**Careful:** This tuning process can take 8+ hours per test.  
+
 ### (4) FinalTestingOneDay.ipynb
+
+
 
 ### (5) FinalTestingOneWeek.ipynb
 
-**Note** The following features were removed from one-week forecasting:  DailyAvg, DailyBusyness, and AvgDailyDiff due to concerns of improper information gain, however this was a mistake and these features really can be used. Luckily they rank low on feature importance, so it is likely this hurt performance very little. 
+
+
+**Note:** The following features were removed from one-week forecasting:  DailyAvg, DailyBusyness, and AvgDailyDiff due to concerns of improper information gain, however this was a mistake and these features really can be used. Luckily they rank low on feature importance, so it is likely this hurt performance very little. 
